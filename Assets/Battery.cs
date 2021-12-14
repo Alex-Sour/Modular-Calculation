@@ -9,14 +9,31 @@ public class Battery : MonoBehaviour
     public float dischargeSpeed = 0.05f;
     public float minHeight = 0.0f;
     public float maxHeight = 114f;
-    public Gradient gradient;
+    Gradient gradient;
+    public Color minColor;
+    public Color middleColor;
+    public Color maxColor;
     private RectTransform rectTransform;
     
     //3FE847
     // Start is called before the first frame update
     void Start()
     {
+        gradient = new Gradient();
         rectTransform = GetComponent<RectTransform>();
+        GradientColorKey[] gck = new GradientColorKey[3];
+        GradientAlphaKey[] gak = new GradientAlphaKey[2];
+        gck[0].color = minColor;
+        gck[0].time = 0.0F;
+        gck[2].color = maxColor;
+        gck[2].time = 1.0F;
+        gck[1].color = middleColor;
+        gck[1].time = 0.5F;
+        gak[1].alpha = 1.0F;
+        gak[1].time = 1.0F;
+        gak[0].alpha = 1.0F;
+        gak[0].time = 0.0F;
+    gradient.SetKeys(gck, gak);
     }
 
     // Update is called once per frame
